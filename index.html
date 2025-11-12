@@ -24,11 +24,9 @@
   <section class="py-16 bg-white text-center">
     <div class="container mx-auto px-6 lg:px-20">
       <h2 class="text-3xl font-bold mb-4">Today's Bengali Word</h2>
-      <div class="bg-green-50 p-8 rounded-xl shadow-md max-w-xl mx-auto">
-        <p class="text-4xl font-semibold mb-2">আলোরণ</p>
-        <p class="text-gray-700 mb-2"><strong>Pronunciation:</strong> aloron</p>
-        <p class="text-gray-700 mb-2"><strong>Meaning:</strong> Vibration, excitement</p>
-        <p class="text-gray-700"><strong>Example:</strong> তার কণ্ঠে আলোরণ ছড়িয়ে পড়ল।</p>
+      <div id="daily-word" class="bg-green-50 p-8 rounded-xl shadow-md max-w-xl mx-auto">
+        <!-- Dynamic content loaded by JS -->
+        <p>Loading today's word...</p>
       </div>
     </div>
   </section>
@@ -38,19 +36,26 @@
     <div class="container mx-auto px-6 lg:px-20 text-center">
       <h2 class="text-3xl font-bold mb-6">Subscribe & Receive Daily Words</h2>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+
         <!-- Email Subscription -->
         <div class="bg-white p-8 rounded-xl shadow-md">
           <h3 class="text-2xl font-semibold mb-4">Email Subscription</h3>
-          <input type="email" placeholder="Enter your email" class="w-full border border-gray-300 p-2 rounded mb-4">
-          <button class="w-full bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-green-700 transition">Subscribe via Email</button>
+          <form id="email-subscribe-form" class="space-y-4">
+            <input id="email-input" type="email" placeholder="Enter your email" class="w-full border border-gray-300 p-2 rounded" required>
+            <button type="submit" class="w-full bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-green-700 transition">Subscribe via Email</button>
+          </form>
         </div>
+
         <!-- WhatsApp Subscription -->
         <div class="bg-white p-8 rounded-xl shadow-md">
           <h3 class="text-2xl font-semibold mb-4">WhatsApp Subscription</h3>
-          <input type="tel" placeholder="Enter WhatsApp number" class="w-full border border-gray-300 p-2 rounded mb-4">
-          <button class="w-full bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-green-700 transition">Subscribe via WhatsApp</button>
+          <form id="whatsapp-subscribe-form" class="space-y-4">
+            <input id="whatsapp-input" type="tel" placeholder="Enter WhatsApp number" class="w-full border border-gray-300 p-2 rounded" required>
+            <button type="submit" class="w-full bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-green-700 transition">Subscribe via WhatsApp</button>
+          </form>
           <p class="text-gray-600 text-sm mt-2">By subscribing, you agree to receive daily messages via WhatsApp.</p>
         </div>
+
       </div>
     </div>
   </section>
@@ -68,14 +73,14 @@
         <!-- Signup Form -->
         <div class="bg-green-50 p-8 rounded-xl shadow-lg">
           <h3 class="text-2xl font-semibold mb-4">Sign Up Your School</h3>
-          <form class="space-y-4">
-            <input type="text" placeholder="School Name" class="w-full border border-gray-300 p-2 rounded">
-            <input type="text" placeholder="Contact Name" class="w-full border border-gray-300 p-2 rounded">
-            <input type="email" placeholder="Email" class="w-full border border-gray-300 p-2 rounded">
-            <input type="text" placeholder="Phone (optional)" class="w-full border border-gray-300 p-2 rounded">
-            <input type="number" placeholder="Number of Students (optional)" class="w-full border border-gray-300 p-2 rounded">
+          <form id="schools-form" class="space-y-4">
+            <input name="school_name" type="text" placeholder="School Name" class="w-full border border-gray-300 p-2 rounded" required>
+            <input name="contact_name" type="text" placeholder="Contact Name" class="w-full border border-gray-300 p-2 rounded" required>
+            <input name="email" type="email" placeholder="Email" class="w-full border border-gray-300 p-2 rounded" required>
+            <input name="phone" type="text" placeholder="Phone (optional)" class="w-full border border-gray-300 p-2 rounded">
+            <input name="students_count" type="number" placeholder="Number of Students (optional)" class="w-full border border-gray-300 p-2 rounded">
             <div class="flex items-center">
-              <input type="checkbox" id="future" class="mr-2">
+              <input type="checkbox" name="interested_in_future" id="future" class="mr-2">
               <label for="future" class="text-gray-700 text-sm">Yes, we want updates about future features</label>
             </div>
             <button type="submit" class="w-full bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-green-700 transition">Sign Up School</button>
@@ -135,6 +140,87 @@
       <p class="mt-2 text-sm">Follow us on social media for updates!</p>
     </div>
   </footer>
+
+  <!-- JS -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+      // 1. Fetch Daily Word
+      async function loadDailyWord() {
+        try {
+          const res = await fetch("/api/word-of-the-day");
+          const word = await res.json();
+          document.getElementById("daily-word").innerHTML = `
+            <p class="text-4xl font-semibold mb-2">${word.bangla_word}</p>
+            <p class="text-gray-700 mb-2"><strong>Pronunciation:</strong> ${word.pronunciation}</p>
+            <p class="text-gray-700 mb-2"><strong>Meaning:</strong> ${word.english_meaning}</p>
+            <p class="text-gray-700"><strong>Example:</strong> ${word.example_sentence}</p>
+          `;
+        } catch (err) {
+          console.error("Failed to load daily word", err);
+        }
+      }
+      loadDailyWord();
+
+      // 2. Email Subscription
+      const emailForm = document.getElementById("email-subscribe-form");
+      emailForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const email = document.getElementById("email-input").value;
+        try {
+          const res = await fetch("/api/subscribe/email", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({email})
+          });
+          const data = await res.json();
+          alert(data.message || "Subscribed successfully!");
+          emailForm.reset();
+        } catch (err) {
+          alert("Failed to subscribe");
+        }
+      });
+
+      // 3. WhatsApp Subscription
+      const waForm = document.getElementById("whatsapp-subscribe-form");
+      waForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const phone = document.getElementById("whatsapp-input").value;
+        try {
+          const res = await fetch("/api/subscribe/whatsapp", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({phone})
+          });
+          const data = await res.json();
+          alert(data.message || "WhatsApp subscription successful!");
+          waForm.reset();
+        } catch (err) {
+          alert("Failed to subscribe via WhatsApp");
+        }
+      });
+
+      // 4. Schools Signup
+      const schoolForm = document.getElementById("schools-form");
+      schoolForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const formData = Object.fromEntries(new FormData(schoolForm));
+        try {
+          const res = await fetch("/api/schools/signup", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(formData)
+          });
+          const data = await res.json();
+          alert(data.message || "School signed up successfully!");
+          schoolForm.reset();
+        } catch (err) {
+          alert("Failed to signup school");
+        }
+      });
+
+    });
+  </script>
 
 </body>
 </html>
