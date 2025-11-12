@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bangla Word Daily</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+
+  <!-- Hero Section -->
+  <section class="bg-green-600 text-white py-20">
+    <div class="container mx-auto px-6 lg:px-20 text-center">
+      <h1 class="text-5xl font-bold mb-4">Bangla Word Daily</h1>
+      <p class="text-xl mb-8">Learn one beautiful Bengali word every day 🇧🇩</p>
+      <div class="flex flex-col md:flex-row justify-center gap-4">
+        <a href="#subscribe" class="bg-white text-green-600 font-bold py-3 px-6 rounded shadow hover:bg-gray-100 transition">Subscribe Now</a>
+        <a href="#schools" class="border border-white text-white font-bold py-3 px-6 rounded hover:bg-white hover:text-green-600 transition">Schools Signup</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Daily Word Section -->
+  <section class="py-16 bg-white text-center">
+    <div class="container mx-auto px-6 lg:px-20">
+      <h2 class="text-3xl font-bold mb-4">Today's Bengali Word</h2>
+      <div class="bg-green-50 p-8 rounded-xl shadow-md max-w-xl mx-auto">
+        <p class="text-4xl font-semibold mb-2">আলোরণ</p>
+        <p class="text-gray-700 mb-2"><strong>Pronunciation:</strong> aloron</p>
+        <p class="text-gray-700 mb-2"><strong>Meaning:</strong> Vibration, excitement</p>
+        <p class="text-gray-700"><strong>Example:</strong> তার কণ্ঠে আলোরণ ছড়িয়ে পড়ল।</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subscription Section -->
+  <section id="subscribe" class="py-16 bg-gray-100">
+    <div class="container mx-auto px-6 lg:px-20 text-center">
+      <h2 class="text-3xl font-bold mb-6">Subscribe & Receive Daily Words</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+        <!-- Email Subscription -->
+        <div class="bg-white p-8 rounded-xl shadow-md">
+          <h3 class="text-2xl font-semibold mb-4">Email Subscription</h3>
+          <input type="email" placeholder="Enter your email" class="w-full border border-gray-300 p-2 rounded mb-4">
+          <button class="w-full bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-green-700 transition">Subscribe via Email</button>
+        </div>
+        <!-- WhatsApp Subscription -->
+        <div class="bg-white p-8 rounded-xl shadow-md">
+          <h3 class="text-2xl font-semibold mb-4">WhatsApp Subscription</h3>
+          <input type="tel" placeholder="Enter WhatsApp number" class="w-full border border-gray-300 p-2 rounded mb-4">
+          <button class="w-full bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-green-700 transition">Subscribe via WhatsApp</button>
+          <p class="text-gray-600 text-sm mt-2">By subscribing, you agree to receive daily messages via WhatsApp.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schools Signup Section -->
+  <section id="schools" class="py-16 bg-white">
+    <div class="container mx-auto px-6 lg:px-20">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold mb-4">Empower Your Students with Daily Bengali Words</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          Bring language, culture, and vocabulary to your classroom, one word at a time.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <!-- Signup Form -->
+        <div class="bg-green-50 p-8 rounded-xl shadow-lg">
+          <h3 class="text-2xl font-semibold mb-4">Sign Up Your School</h3>
+          <form class="space-y-4">
+            <input type="text" placeholder="School Name" class="w-full border border-gray-300 p-2 rounded">
+            <input type="text" placeholder="Contact Name" class="w-full border border-gray-300 p-2 rounded">
+            <input type="email" placeholder="Email" class="w-full border border-gray-300 p-2 rounded">
+            <input type="text" placeholder="Phone (optional)" class="w-full border border-gray-300 p-2 rounded">
+            <input type="number" placeholder="Number of Students (optional)" class="w-full border border-gray-300 p-2 rounded">
+            <div class="flex items-center">
+              <input type="checkbox" id="future" class="mr-2">
+              <label for="future" class="text-gray-700 text-sm">Yes, we want updates about future features</label>
+            </div>
+            <button type="submit" class="w-full bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-green-700 transition">Sign Up School</button>
+          </form>
+        </div>
+
+        <!-- Benefits Table -->
+        <div>
+          <h3 class="text-2xl font-semibold mb-4">What Schools Get</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border border-gray-200 rounded-lg">
+              <thead class="bg-green-100">
+                <tr>
+                  <th class="p-3">Feature</th>
+                  <th class="p-3">MVP</th>
+                  <th class="p-3">Future / Premium</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr>
+                  <td class="p-3">Daily Word Delivery</td>
+                  <td class="p-3">Email to students</td>
+                  <td class="p-3">Email + WhatsApp + Audio pronunciation</td>
+                </tr>
+                <tr>
+                  <td class="p-3">Teacher Dashboard</td>
+                  <td class="p-3">N/A</td>
+                  <td class="p-3">Engagement stats, weekly reports</td>
+                </tr>
+                <tr>
+                  <td class="p-3">Word Archive</td>
+                  <td class="p-3">N/A</td>
+                  <td class="p-3">Searchable past words</td>
+                </tr>
+                <tr>
+                  <td class="p-3">Quizzes & Worksheets</td>
+                  <td class="p-3">N/A</td>
+                  <td class="p-3">Printable exercises for students</td>
+                </tr>
+                <tr>
+                  <td class="p-3">Student Leaderboards</td>
+                  <td class="p-3">N/A</td>
+                  <td class="p-3">Gamified engagement tracking</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-green-600 text-white py-8 mt-16">
+    <div class="container mx-auto px-6 lg:px-20 text-center">
+      <p>© 2025 Bangla Word Daily. All rights reserved.</p>
+      <p class="mt-2 text-sm">Follow us on social media for updates!</p>
+    </div>
+  </footer>
+
+</body>
+</html>
